@@ -1,4 +1,9 @@
-<div class="d-flex align-items-center justify-content-center box">
+<div class="d-flex flex-column align-items-center justify-content-center box">
+  {{#if alert}}
+    <div class="alert alert-danger" role="alert">
+      {{alert}}
+    </div>
+  {{/if}}
   <form action="/login" method="POST" class="mb-3 d-flex flex-column align-items-center">
     <h1 class="mb-3">Account Login</h1>
     <input type="email" class="form-control mb-3" name="email" placeholder="Email">
