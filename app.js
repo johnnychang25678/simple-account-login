@@ -12,7 +12,7 @@ app.set('view engine', 'handlebars')
 // middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
-app.use(session({ secret: 'mySecret', name: 'user', resave: false, saveUninitialized: false, cookie: { maxAge: 6000 } }))
+app.use(session({ secret: 'mySecret', name: 'user', resave: false, saveUninitialized: false, cookie: { maxAge: 60000 } }))
 // a session will be stored in req.session for every request
 
 // routes
