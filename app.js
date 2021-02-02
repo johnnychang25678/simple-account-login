@@ -12,11 +12,19 @@ app.set('view engine', 'handlebars')
 // middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
-app.use(session({ secret: 'mySecret', name: 'user', resave: false, saveUninitialized: false, cookie: { maxAge: 60000 } }))
+app.use(session({
+  secret: 'mySecret',
+  name: 'user',
+  resave: true,
+  saveUninitialized: false, // not stored in store and cookie if not logged in yet
+  // cookie: { maxAge: 600000 }
+}))
 // a session will be stored in req.session for every request
 
 // routes
 app.get('/', (req, res) => {
+  console.log(req.session)
+  console.log(req.sessionID)
   if (req.session.user) {
     return res.redirect('/welcome')
   }
@@ -32,6 +40,7 @@ function auth(req, res, next) {
     return res.redirect('/')
   }
 
+  next()
 }
 
 app.get('/welcome', auth, (req, res) => {
